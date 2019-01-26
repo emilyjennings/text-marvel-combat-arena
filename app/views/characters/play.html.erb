@@ -1,0 +1,11 @@
+<h1>Search Characters</h1>
+
+<%= form_tag '/search' do %>
+  <%= submit_tag "Search characters!" %>
+<% end %>
+
+<%if @characters%>
+  <% @characters.each do |c| %>
+    <%=c['name']%>
+  <%end%>
+<%end%>

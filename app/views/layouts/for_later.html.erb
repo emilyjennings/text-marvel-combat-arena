@@ -1,0 +1,11 @@
+
+<%if @resp%>
+  <ul>
+    <%@char_search.each do |c|%>
+      <li>
+        <%=c["name"]%>
+        <%=link_to c["url"], c["url"]%>
+      </li>
+    <%end%>
+  </ul>
+<%end%>
