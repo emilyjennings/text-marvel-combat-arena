@@ -20,6 +20,11 @@ Other:
 
 ### How to start
 
+clone this repo
+run bundler
+start the rails server
+you will need to insert your own Marvel API key in the controller code, which you can get at https://developer.marvel.com/account, just replace ENV[MARVEL_PUBLIC_KEY] and ENV[MARVEL_PRIVATE_KEY] with yours.
+
 ### Ruby version
 
 Ruby 2.5.3
