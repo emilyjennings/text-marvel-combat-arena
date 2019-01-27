@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .thumbnail img {
-  width: 60px;
-  height: 60px;
+  width: 150px;
+  height: 150px;
 }
 
 .name {
@@ -16,7 +16,16 @@
   border: 3px solid teal;
   display: inline-block;
   float: left;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   text-align: center;
+}
+
+.character_player img{
+  border: 3px solid teal;
+  display: inline-block;
+  float: left;
+  text-align: center;
+  width: 200px;
+  height: 200px;
 }

@@ -14,10 +14,16 @@
 <p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
 <%if @character_one%>
-  <%=@character_one%>
+  <div class="character_player"
+    <div class="name"><%=@character_one[0]["name"]%></div>
+    <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
+  </div>
 <%end%>
 <%if @character_two%>
-  <%=@character_two%>
+  <div class="character_player"
+    <div class="name"><%=@character_two[0]["name"]%></div>
+    <div class="thumbnail"><%= image_tag @character_two[0]['thumbnail']['path'] + '.jpg' %></div>
+  </div>
 <%end%>
 
 

@@ -1,0 +1,21 @@
+<h1>All Characters</h1>
+
+<h2>Enter a few characters to see characters beginning with those letter(s) or number(s):</h2>
+<%= form_tag '/searchByLetter' do %>
+  <%= label_tag :letter %>
+  <%= text_field_tag :letter %>
+  <%= submit_tag "Search Characters by Letter(s)" %>
+<% end %>
+
+<%if @characters%>
+
+  <% @characters.each do |c| %>
+    <div class="character">
+      <div class="name"><%=c['name']%></div>
+      <div class="thumbnail"><%= image_tag c['thumbnail']['path'] + '.jpg' %></div>
+    </div>
+  <%end%>
+
+<%end%>
+
+<%= render partial: 'characters/marvelcopyright'%>
