@@ -64,7 +64,8 @@ class CharactersController < ApplicationController
         @all_words_two = @word_two = @character_two[0]['description'].split(' ')
       end
       #I decided to compare the word_one and word_two variables in the view for the winner but I think I could easily put those conditional statements here
-
+      @two_magic = @all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")
+      @one_magic = @all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive")
 
       #an error mesage in case there's a timeout
       rescue Faraday::ConnectionFailed
