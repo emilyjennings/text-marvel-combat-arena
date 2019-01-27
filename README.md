@@ -26,6 +26,14 @@ I thought of a lot of great ways this could be refactored and improved upon to b
 It was hard to get the logic to work at first for the winner with the special magic word exceptions. I ran into some syntax issues but got through them and made sure that draws were accounted for.
 
 The errors were the last difficulty here. I couldn't seem to display an error message on the view until I used the .empty? method on the params. I also couldn't find a case where the error was directly from the API to test that out.
+<<<<<<< HEAD
+=======
+
+## Why I loved working on this so much
+I learned a ton about calling APIs through working on this. I already had worked with APIs from foursquare and github, but it was so fun working with Marvel because the documentation was so well written, and the content was right up my alley!
+
+I just loved how I assumed every really hard part I was stuck on, such as displaying the error messages, would take me an entire day to figure out, but when I found the answer through reading Ruby documentation is was such a quick move ahead to the next thing! Always re-assuring that the answer is indeed out there and it just takes persistence to find it.
+>>>>>>> working
 
 ## To do (in order):
 - [x] - Set up the API call using Faraday
