@@ -14,7 +14,7 @@ class CharactersController < ApplicationController
     timestamp = DateTime.now.to_s
     hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
 
-    # begin
+    begin
     @resp = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
       req.params['ts'] = timestamp
       req.params['apikey'] = public_key
@@ -26,17 +26,26 @@ class CharactersController < ApplicationController
     @characters = characters['data']['results']
     render 'play'
 
-    # rescue Faraday::ConnectionFailed
-    #   @error = "There was a timeout. Please try again."
-    # end
+    rescue Faraday::ConnectionFailed
+      @error = "There was a timeout. Please try again."
+    end
 
   end
 
   def index
+  end
+
+  def searchByLetter
+    public_key = ENV['public_key']
+    private_key = ENV['private_key']
+    timestamp = DateTime.now.to_s
+    hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
+
     @resp = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
       req.params['ts'] = timestamp
       req.params['apikey'] = public_key
       req.params['hash'] = hash
+      req.params['nameStartsWith'] = params[:letter]
     end
 
     characters = JSON.parse(@resp.body)

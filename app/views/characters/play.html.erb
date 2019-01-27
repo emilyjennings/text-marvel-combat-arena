@@ -1,11 +1,18 @@
-<h1>Search Characters</h1>
+<h1>Play!</h1>
+<h2>Marvel Character Combat Arena</h2>
 
-<%= form_tag '/search' do %>
-  <%= submit_tag "Search characters!" %>
-<% end %>
+<h3>Enter a character for Player One:</h3>
+<h3>Enter a character for Player Two:</h3>
+
+<p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
 <%if @characters%>
 
-
+  <% @characters.each do |c| %>
+    <div class="character">
+      <div class="name"><%=c['name']%></div>
+      <div class="thumbnail"><%= image_tag c['thumbnail']['path'] + '.jpg' %></div>
+    </div>
+  <%end%>
 
 <%end%>
