@@ -9,60 +9,74 @@ class CharactersController < ApplicationController
 
 
   def character_play
-    public_key = ENV['public_key']
-    private_key = ENV['private_key']
-    timestamp = DateTime.now.to_s
-    hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
-    #I spent a fair amount of time looking at the Marvel API documentation to figure out how they wanted the hash digested, and even get help at the meetup I went to during this project on the MD5 digest
-    #I looked at other repos on github that had used the Marvel API to see how they called it as well
-
-    #Below, you'll see the two characters chosen by the players and that they're found in the Marvel universe via the API request and then this makes it possible to put their details in the views
-    begin
-    @resp_one = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
-      req.params['ts'] = timestamp
-      req.params['apikey'] = public_key
-      req.params['hash'] = hash
-      req.params['name'] = params[:character_one]
-    end
-
-    character_one = JSON.parse(@resp_one.body)
-
-    #error cases
-    if @resp_one.success?
-      @character_one = character_one['data']['results']
-      #I want to refactor this later so the winner shows on another page by redirect
-      #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
-      @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
-      @all_words_one = @character_one[0]['description'].split(' ')
+    if params[:character_one] = "" || params[:character_two] = "" || params[:num] = ""
+      @error = "You need to enter all parameters for this game to work."
     else
-      @error_code = character_one["code"]
-      @error = character_one["status"]
+      public_key = ENV['public_key']
+      private_key = ENV['private_key']
+      timestamp = DateTime.now.to_s
+      hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
+      #I spent a fair amount of time looking at the Marvel API documentation to figure out how they wanted the hash digested, and even get help at the meetup I went to during this project on the MD5 digest
+      #I looked at other repos on github that had used the Marvel API to see how they called it as well
+
+      #Below, you'll see the two characters chosen by the players and that they're found in the Marvel universe via the API request and then this makes it possible to put their details in the views
+      begin
+      @resp_one = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
+        req.params['ts'] = timestamp
+        req.params['apikey'] = public_key
+        req.params['hash'] = hash
+        req.params['name'] = params[:character_one]
+      end
+
+      character_one = JSON.parse(@resp_one.body)
+
+
+      @resp_two = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
+        req.params['ts'] = timestamp
+        req.params['apikey'] = public_key
+        req.params['hash'] = hash
+        req.params['name'] = params[:character_two]
+      end
+
+      character_two = JSON.parse(@resp_two.body)
+
+      #This was hard to make error messages because it turns out if someone tries to find a character name that isn't in the database, it's still a response code of 200. I left this here for cases when it just isn't 200, but made a new error system below.
+      if character_one["code"] != 200
+        @error = character_one["status"] || character_one["message"]
+      elsif character_two["code"] != 200
+        @error = character_two["status"] || character_two["message"]
+      end
+
+
+      @character_one = character_one['data']['results']
+      @character_two = character_two['data']['results']
+
+      #error cases for when the character isn't found
+      if @character_two.empty? || @character_one.empty?
+        @error = "One of these characters is not spelled right or doesn't exist."
+      elsif @resp_one.success? && @resp_two.success?
+        #I want to refactor this later so the winner shows on another page by redirect
+        #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
+        @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
+        @all_words_one = @character_one[0]['description'].split(' ')
+        @word_two = @character_two[0]['description'].split(' ')[params[:num].to_i]
+        @all_words_two = @word_two = @character_two[0]['description'].split(' ')
+      end
+      #I decided to compare the word_one and word_two variables in the view for the winner but I think I could easily put those conditional statements here
+
+
+      #an error mesage in case there's a timeout
+      rescue Faraday::ConnectionFailed
+        @error = "There was a timeout. Please try again."
+
+      rescue Faraday::Response::RaiseError
+        @error = "There was a problem finding that. Please try again."
+      end
+
+
+      #both characters are identified! The play view is rendered with the proper info/images
     end
-
-
-    @resp_two = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
-      req.params['ts'] = timestamp
-      req.params['apikey'] = public_key
-      req.params['hash'] = hash
-      req.params['name'] = params[:character_two]
-    end
-
-    character_two = JSON.parse(@resp_two.body)
-
-    @character_two = character_two['data']['results']
-    @word_two = @character_two[0]['description'].split(' ')[params[:num].to_i]
-    @all_words_two = @word_two = @character_two[0]['description'].split(' ')
-    #I decided to compare the word_one and word_two variables in the view but I think I could easily put those conditional statements here
-
     render 'play'
-    #both characters are identified! The play view is reloaded with the proper info/images
-
-
-    #an error mesage in case there's a timeout
-    rescue Faraday::ConnectionFailed
-      @error = "There was a timeout. Please try again."
-    end
-
   end
 
   def index
@@ -90,6 +104,7 @@ class CharactersController < ApplicationController
     render 'index'
   end
 
+  # This could be used later when refactoring and using sessions
   # def winner
   #   num = params[:num].to_i
   #   word_one = @character_one[0]['description'].split(' ')[num]

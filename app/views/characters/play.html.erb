@@ -15,7 +15,7 @@
 <p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
 
-<%if @character_one && @character_two%>
+<%if @word_one && @word_two %>
   <div class="clearfix">
     <div class="players">
       <div class="character_play">
@@ -55,8 +55,8 @@
   </div>
   <br></br>
 
+<%elsif @error%>
 
-
-
+  <h2>Sorry, <%=@error%></h2>
 
 <%end%>
