@@ -1,18 +1,26 @@
 <h1>Play!</h1>
 <h2>Marvel Character Combat Arena</h2>
+<h2>Who will battle today?</h2>
 
-<h3>Enter a character for Player One:</h3>
-<h3>Enter a character for Player Two:</h3>
+<h3>Enter both characters:</h3>
+<%= form_tag '/play' do %>
+  <%= label_tag :character_one %>
+  <%= text_field_tag :character_one %>
+  <%= label_tag :character_two %>
+  <%= text_field_tag :character_two %>
+  <%= submit_tag "Submit" %>
+<% end %>
 
 <p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
-<%if @characters%>
-
-  <% @characters.each do |c| %>
-    <div class="character">
-      <div class="name"><%=c['name']%></div>
-      <div class="thumbnail"><%= image_tag c['thumbnail']['path'] + '.jpg' %></div>
-    </div>
-  <%end%>
-
+<%if @character_one%>
+  <%=@character_one%>
 <%end%>
+<%if @character_two%>
+  <%=@character_two%>
+<%end%>
+
+
+
+<br><br>
+<%= render partial: 'characters/marvelcopyright'%>

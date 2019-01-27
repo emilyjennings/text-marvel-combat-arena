@@ -15,15 +15,29 @@ class CharactersController < ApplicationController
     hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
 
     begin
-    @resp = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
+    @resp_one = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
       req.params['ts'] = timestamp
       req.params['apikey'] = public_key
       req.params['hash'] = hash
+      req.params['name'] = params[:character_one]
     end
 
-    characters = JSON.parse(@resp.body)
+    character_one = JSON.parse(@resp_one.body)
 
-    @characters = characters['data']['results']
+    @character_one = character_one['data']['results']
+
+
+    @resp_two = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
+      req.params['ts'] = timestamp
+      req.params['apikey'] = public_key
+      req.params['hash'] = hash
+      req.params['name'] = params[:character_two]
+    end
+
+    character_two = JSON.parse(@resp_two.body)
+
+    @character_two = character_two['data']['results']
+
     render 'play'
 
     rescue Faraday::ConnectionFailed
