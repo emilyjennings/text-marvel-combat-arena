@@ -21,11 +21,16 @@
   text-align: center;
 }
 
-.character_player img{
+.character_play {
   border: 3px solid teal;
-  display: inline-block;
+  display: inline;
   float: left;
-  text-align: center;
   width: 200px;
   height: 200px;
+  text-align: center;
+}
+
+.text {
+  display: inline-block;
+  float: left;
 }

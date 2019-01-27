@@ -13,20 +13,20 @@
 
 <p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
-<%if @character_one%>
-  <div class="character_player"
+<%if @character_one && @character_two%>
+  <div class="character_play">
     <div class="name"><%=@character_one[0]["name"]%></div>
     <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
   </div>
-<%end%>
-<%if @character_two%>
-  <div class="character_player"
+  <div class="text"><h1> VS </h1></div>
+
+  <div class="character_play">
     <div class="name"><%=@character_two[0]["name"]%></div>
     <div class="thumbnail"><%= image_tag @character_two[0]['thumbnail']['path'] + '.jpg' %></div>
   </div>
 <%end%>
 
+<p></p>
 
 
-<br><br>
 <%= render partial: 'characters/marvelcopyright'%>
