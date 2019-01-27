@@ -27,6 +27,11 @@ It was hard to get the logic to work at first for the winner with the special ma
 
 The errors were the last difficulty here. I couldn't seem to display an error message on the view.
 
+## Why I loved working on this so much
+I learned a ton about calling APIs through working on this. I already had worked with APIs from foursquare and github, but it was so fun working with Marvel because the documentation was so well written, and the content was right up my alley!
+
+I just loved how I assumed every really hard part I was stuck on, such as displaying the error messages, would take me an entire day to figure out, but when I found the answer through reading Ruby documentation is was such a quick move ahead to the next thing! Always re-assuring that the answer is indeed out there and it just takes persistence to find it.
+
 ## To do (in order):
 - [x] - Set up the API call using Faraday
 - [x] - Set up a form where the users put in the names of two characters and a seed number
@@ -35,7 +40,7 @@ The errors were the last difficulty here. I couldn't seem to display an error me
 - [x] - display the winner
 - [x] - The winner of the battle is the character whose WORD has the most characters EXCEPT if either character has a MAGIC WORD “Gamma” or “Radioactive” they automatically Win
 - [x] - Create a case where both players have the magic word
-- [ ] - Handle any errors or edge cases and display the message in a user friendly manner, such as the names weren't entered or the name couldn't be found in the database
+- [x] - Handle any errors or edge cases and display the message in a user friendly manner, such as the names weren't entered or the name couldn't be found in the database
 - [ ] - refactor the code into models, organize by marvel (api calls) and characters maybe
 - [ ] - create helper methods to increase the readability of the code
 - [ ] - create a login and sessions so the player can go between views and controllers
