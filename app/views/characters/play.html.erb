@@ -34,12 +34,10 @@
   </div>
   <div class="clearfix">
     <div class="winner">
-      <%if @all_words_one.include?("Gamma" || "Radioactive" || "gamma" || "radioactive") && @all_words_two.include?("Gamma" || "Radioactive" || "gamma" || "radioactive")%>
-        <h1>It's a draw!</h1>
-      <%elsif @all_words_one.include?("Gamma" || "Radioactive" || "gamma" || "radioactive")%>
+      <%if (@all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive"))%>
         <h1>The winner is: <%=@character_one[0]["name"]%></h1>
         <p><%=@character_one[0]["description"]%></p>
-      <%elsif @all_words_two.include?("Gamma" || "Radioactive" || "gamma" || "radioactive")%>
+      <%elsif (@all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive"))%>
         <h1>The winner is: <%=@character_two[0]["name"]%></h1>
         <p><%=@character_two[0]["description"]%></p>
       <%elsif @word_one.length > @word_two.length%>
