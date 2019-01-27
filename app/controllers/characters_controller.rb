@@ -31,6 +31,7 @@ class CharactersController < ApplicationController
     #I want to refactor this later so the winner shows on another page by redirect
     #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
     @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
+    @all_words_one = @character_one[0]['description'].split(' ')
 
 
     @resp_two = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
@@ -44,6 +45,7 @@ class CharactersController < ApplicationController
 
     @character_two = character_two['data']['results']
     @word_two = @character_two[0]['description'].split(' ')[params[:num].to_i]
+    @all_words_two = @word_two = @character_two[0]['description'].split(' ')
     #I decided to compare the word_one and word_two variables in the view but I think I could easily put those conditional statements here
 
     render 'play'

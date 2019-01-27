@@ -35,7 +35,7 @@ I thought of a lot of great ways this could be refactored and improved upon to b
 [] - create a login and sessions so the player can go between views and controllers
 [] - add cool front end features like displaying the image of each character
 
-### How to start and run this
+## How to start and run this
 
 clone this repo
 run bundler
@@ -44,6 +44,6 @@ you will need to insert your own Marvel API key in the controller code before st
 go to the root route, localhost:3000, which takes you directly to the 'play' view.
 Have fun!
 
-### Ruby version
+## Ruby version
 
 Ruby 2.5.3
