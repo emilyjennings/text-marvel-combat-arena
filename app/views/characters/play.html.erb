@@ -13,20 +13,31 @@
 
 <p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
+
 <%if @character_one && @character_two%>
-  <div class="character_play">
-    <div class="name"><%=@character_one[0]["name"]%></div>
-    <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
-  </div>
-  <div class="text"><h1> VS </h1></div>
+  <div class="clearfix">
+    <div class="players">
+      <div class="character_play">
+        <div class="name"><%=@character_one[0]["name"]%></div>
+        <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
+      </div>
+      <div class="text"><h1> VS </h1></div>
 
-  <div class="character_play">
-    <div class="name"><%=@character_two[0]["name"]%></div>
-    <div class="thumbnail"><%= image_tag @character_two[0]['thumbnail']['path'] + '.jpg' %></div>
+      <div class="character_play">
+        <div class="name"><%=@character_two[0]["name"]%></div>
+        <div class="thumbnail"><%= image_tag @character_two[0]['thumbnail']['path'] + '.jpg' %></div>
+      </div>
+    </div>
   </div>
+  <br></br>
+
+
+  <div id="win">Who will win?</div>
+  <%= form_tag '/winner' do %>
+    <%= label_tag 'Enter a number 1-9'%>
+    <%= text_field_tag :num %>
+    <%= submit_tag "Click here to see the winner!" %>
+  <% end %>
+
+
 <%end%>
-
-<p></p>
-
-
-<%= render partial: 'characters/marvelcopyright'%>

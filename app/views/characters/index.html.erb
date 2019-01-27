@@ -8,17 +8,16 @@
 <% end %>
 
 <%if @characters%>
-
-  <% @characters.each do |c| %>
-    <div class="character">
-      <div class="name"><%=c['name']%></div>
-      <div class="thumbnail"><%= image_tag c['thumbnail']['path'] + '.jpg' %></div>
-    </div>
-  <%end%>
+  <div class="clearfix">
+    <% @characters.each do |c| %>
+      <div class="character">
+        <div class="name"><%=c['name']%></div>
+        <div class="thumbnail"><%= image_tag c['thumbnail']['path'] + '.jpg' %></div>
+      </div>
+    <%end%>
+  </div>
 
 <%end%>
 <br>
 
 <%=link_to 'Go back to play', play_path%>
-
-<%= render partial: 'characters/marvelcopyright'%>

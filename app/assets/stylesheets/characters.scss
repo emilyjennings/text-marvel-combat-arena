@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  margin: 20px;
+  background-color: #87eda7;
+  color: #42356b;
+}
+
 .thumbnail img {
   width: 150px;
   height: 150px;
@@ -13,7 +19,7 @@
 }
 
 .character {
-  border: 3px solid teal;
+  border: 3px solid #42356b;
   display: inline-block;
   float: left;
   width: 200px;
@@ -22,15 +28,39 @@
 }
 
 .character_play {
-  border: 3px solid teal;
-  display: inline;
-  float: left;
+  border: 3px solid #42356b;
   width: 200px;
   height: 200px;
   text-align: center;
+  float: left;
 }
 
 .text {
-  display: inline-block;
+  display: block;
   float: left;
+}
+
+.players {
+  margin: 30px;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.win {
+  display: block;
+  float: none;
+  clear: both;
+  width: 100%;
+}
+
+a {
+  color: #110733;
+}
+
+a:hover {
+  color: #09e84f;
 }
