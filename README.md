@@ -24,16 +24,16 @@ I wanted to use Postman to look at the hashes I was calling in the Marvel API so
 I thought of a lot of great ways this could be refactored and improved upon to be a fun app. I want to make it so there are sessions that can help the players' choices persist through the controller with different views for the winner sot here's a bit of suspense before the winner is shown.
 
 ## To do (in order):
-[x] - Set up the API call using Faraday
-[x] - Set up a form where the users put in the names of two characters and a seed number
-[x] - create a list of characters either to browse or create a dropdown to choose from
-[x] - make the logic in the controller where the system decides who won based on number of characters
-[x] - display the winner
-[] - The winner of the battle is the character whose WORD has the most characters EXCEPT if either character has a MAGIC WORD “Gamma” or “Radioactive” they automatically Win
-[] - Handle any errors or edge cases and display the message in a user friendly manner
-[] - refactor the code into models, organize by marvel (api calls) and characters maybe
-[] - create a login and sessions so the player can go between views and controllers
-[] - add cool front end features like displaying the image of each character
+- [x] - Set up the API call using Faraday
+- [x] - Set up a form where the users put in the names of two characters and a seed number
+- [x] - create a list of characters either to browse or create a dropdown to choose from
+- [x] - make the logic in the controller where the system decides who won based on number of characters
+- [x] - display the winner
+- [] - The winner of the battle is the character whose WORD has the most characters EXCEPT if either character has a MAGIC WORD “Gamma” or “Radioactive” they automatically Win
+- [] - Handle any errors or edge cases and display the message in a user friendly manner
+- [] - refactor the code into models, organize by marvel (api calls) and characters maybe
+- [] - create a login and sessions so the player can go between views and controllers
+- [] - add cool front end features like displaying the image of each character
 
 ## How to start and run this
 
