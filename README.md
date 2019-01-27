@@ -18,12 +18,24 @@ Other:
 1. Handle any errors or edge cases and display the message in a user friendly manner
 2. Provide clear instructions on how to retrieve and run your code
 
+## Notes on what happened when I was making this 
+I wanted to use Postman to look at the hashes I was calling in the Marvel API so I didn't have to go into pry every time to check the hashes. It helped a lot, but it was really hard to get the MDN digest to work in Postman on the hash parameter. I went to a meetup during this project development and someone ended up helping me get Postman to work on the Marvel API.
+
+## To do (in order):
+[x]- Set up the API call using Faraday
+[]- Set up a form where the users put in the names of two characters
+[]- create a list of characters either to browse or create a dropdown to choose from
+[]- make the logic in the controller where the system decides who won
+[]- display the winner
+[]- refactor the code into models, organize by marvel and characters maybe
+[]- add cool front end features like displaying the image of each character
+
 ### How to start
 
 clone this repo
 run bundler
 start the rails server
-you will need to insert your own Marvel API key in the controller code, which you can get at https://developer.marvel.com/account, just replace ENV[MARVEL_PUBLIC_KEY] and ENV[MARVEL_PRIVATE_KEY] with yours.
+you will need to insert your own Marvel API key in the controller code, which you can get at https://developer.marvel.com/account, just replace ENV[public_key] and ENV[private_key] with yours.
 
 ### Ruby version
 
