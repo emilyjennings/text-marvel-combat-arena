@@ -9,8 +9,9 @@ class CharactersController < ApplicationController
 
 
   def character_play
-    if params[:character_one] = "" || params[:character_two] = "" || params[:num] = ""
+    if params[:character_one].empty? || params[:character_two].empty? || params[:num].empty?
       @error = "You need to enter all parameters for this game to work."
+      render 'play'
     else
       public_key = ENV['public_key']
       private_key = ENV['private_key']
@@ -73,10 +74,9 @@ class CharactersController < ApplicationController
         @error = "There was a problem finding that. Please try again."
       end
 
-
       #both characters are identified! The play view is rendered with the proper info/images
+      render 'play'
     end
-    render 'play'
   end
 
   def index
