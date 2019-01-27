@@ -27,11 +27,17 @@ class CharactersController < ApplicationController
 
     character_one = JSON.parse(@resp_one.body)
 
-    @character_one = character_one['data']['results']
-    #I want to refactor this later so the winner shows on another page by redirect
-    #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
-    @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
-    @all_words_one = @character_one[0]['description'].split(' ')
+    #error cases
+    if @resp_one.success?
+      @character_one = character_one['data']['results']
+      #I want to refactor this later so the winner shows on another page by redirect
+      #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
+      @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
+      @all_words_one = @character_one[0]['description'].split(' ')
+    else
+      @error_code = character_one["code"]
+      @error = character_one["status"]
+    end
 
 
     @resp_two = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|

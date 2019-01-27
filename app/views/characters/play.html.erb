@@ -1,5 +1,4 @@
-<h1>Play!</h1>
-<h2>Marvel Character Combat Arena</h2>
+<h1>Marvel Character Combat Arena</h1>
 <h2>Who will battle today?</h2>
 
 <h3>Enter both characters:</h3>
@@ -20,21 +19,24 @@
   <div class="clearfix">
     <div class="players">
       <div class="character_play">
-        <div class="name"><%=@character_one[0]["name"]%></div>
+        <div class="name"><%= link_to @character_one[0]["name"], @character_one[0]["urls"][0]["url"]%></div>
         <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
       </div>
       <div class="text"><h1> VS </h1></div>
 
       <div class="character_play">
-        <div class="name"><%=@character_two[0]["name"]%></div>
+        <div class="name"><%= link_to @character_two[0]["name"], @character_two[0]["urls"][0]["url"]%></div>
         <!-- I need to refactor this later so the name is a helper method -->
-        <div class="thumbnail"><%= image_tag @character_two[0]['thumbnail']['path'] + '.jpg' %></div>
+        <div class="thumbnail"><%=image_tag @character_two[0]['thumbnail']['path'] + '.jpg'%></div>
       </div>
     </div>
   </div>
   <div class="clearfix">
     <div class="winner">
-      <%if (@all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive"))%>
+
+      <%if (@all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")) && (@all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive"))%>
+        <h1>It's a draw!</h1>
+      <%elsif (@all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive"))%>
         <h1>The winner is: <%=@character_one[0]["name"]%></h1>
         <p><%=@character_one[0]["description"]%></p>
       <%elsif (@all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive"))%>
