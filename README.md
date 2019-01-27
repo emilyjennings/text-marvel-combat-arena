@@ -10,7 +10,7 @@ This Rails app works like this for the user:
 6. Present the winning character to the user
 
 
-Things I need to remember about the Marvel API:
+Things I need to remember about the Marvel API rules:
 1. Add this in a partial layout for each view with the data from the API: "Data provided by Marvel. © 2014 Marvel"
 2. If I use significant data I need to link the entity back to its URL
 
@@ -25,7 +25,7 @@ I thought of a lot of great ways this could be refactored and improved upon to b
 
 It was hard to get the logic to work at first for the winner with the special magic word exceptions. I ran into some syntax issues but got through them and made sure that draws were accounted for.
 
-The errors were the last difficulty here. I couldn't seem to display an error message on the view.
+The errors were the last difficulty here. I couldn't seem to display an error message on the view until I used the .empty? method on the params. I also couldn't find a case where the error was directly from the API to test that out.
 
 ## To do (in order):
 - [x] - Set up the API call using Faraday
@@ -35,7 +35,7 @@ The errors were the last difficulty here. I couldn't seem to display an error me
 - [x] - display the winner
 - [x] - The winner of the battle is the character whose WORD has the most characters EXCEPT if either character has a MAGIC WORD “Gamma” or “Radioactive” they automatically Win
 - [x] - Create a case where both players have the magic word
-- [ ] - Handle any errors or edge cases and display the message in a user friendly manner, such as the names weren't entered or the name couldn't be found in the database
+- [x] - Handle any errors or edge cases and display the message in a user friendly manner, such as the names weren't entered or the name couldn't be found in the database
 - [ ] - refactor the code into models, organize by marvel (api calls) and characters maybe
 - [ ] - create helper methods to increase the readability of the code
 - [ ] - create a login and sessions so the player can go between views and controllers
