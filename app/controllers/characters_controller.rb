@@ -28,6 +28,9 @@ class CharactersController < ApplicationController
     character_one = JSON.parse(@resp_one.body)
 
     @character_one = character_one['data']['results']
+    #I want to refactor this later so the winner shows on another page by redirect
+    #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
+    @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
 
 
     @resp_two = Faraday.get 'http://gateway.marvel.com/v1/public/characters' do |req|
@@ -40,13 +43,11 @@ class CharactersController < ApplicationController
     character_two = JSON.parse(@resp_two.body)
 
     @character_two = character_two['data']['results']
+    @word_two = @character_two[0]['description'].split(' ')[params[:num].to_i]
+    #I decided to compare the word_one and word_two variables in the view but I think I could easily put those conditional statements here
 
     render 'play'
     #both characters are identified! The play view is reloaded with the proper info/images
-
-
-    num = params[:num].to_i
-    @word_one = @character_one[0]['description'].split(' ')[num]
 
 
     #an error mesage in case there's a timeout
@@ -81,9 +82,10 @@ class CharactersController < ApplicationController
     render 'index'
   end
 
-  def winner
-    @character_one = params[:character_one]
-    render 'winner'
-  end
+  # def winner
+  #   num = params[:num].to_i
+  #   word_one = @character_one[0]['description'].split(' ')[num]
+  #   render 'winner'
+  # end
 
 end
