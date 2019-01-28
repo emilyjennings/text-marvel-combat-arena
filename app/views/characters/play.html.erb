@@ -39,19 +39,19 @@
       <%if @one_magic && @two_magic%>
         <h1>It's a draw!</h1>
       <%elsif @one_magic%>
-        <h1>The winner is: <%=@character_one[0]["name"]%></h1>
-        <p><%=@character_one[0]["description"]%></p>
+        <h1>The winner is: <%=name(@character_one)%></h1>
+        <p><%=description(@character_one)%></p>
       <%elsif @two_magic%>
-        <h1>The winner is: <%=@character_two[0]["name"]%></h1>
-        <p><%=@character_two[0]["description"]%></p>
+        <h1>The winner is: <%=name(@character_two)%></h1>
+        <p><%=description(@character_two)%></p>
       <%elsif @word_one.length == @word_two.length%>
         <h1>It's a draw!</h1>
       <%elsif @word_one.length > @word_two.length%>
-        <h1>The winner is: <%=@character_one[0]["name"]%></h1>
-        <p><%=@character_one[0]["description"]%></p>
+        <h1>The winner is: <%=name(@character_one)%></h1>
+        <p><%=description(@character_one)%></p>
       <%else @word_one.length < @word_two.length%>
-        <h1>The winner is: <%=@character_two[0]["name"]%></h1>
-        <p><%=@character_two[0]["description"]%></p>
+        <h1>The winner is: <%=name(@character_two)%></h1>
+        <p><%=description(@character_two)%></p>
       <%end%>
     </div>
   </div>
