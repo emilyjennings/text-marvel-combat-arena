@@ -1,4 +1,4 @@
-# Text MARVEL Combat Area
+# Text MARVEL Combat Arena
 
 This Rails app works like this for the user:
 
