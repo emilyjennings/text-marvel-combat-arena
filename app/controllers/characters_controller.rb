@@ -1,11 +1,12 @@
 require 'pry'
-#used pry in my API calls, especially in the beginning I was having trouble with the MDN digest for the hash parameter. Figured out by using pry that the call wasn't going through
+#Used pry in my API calls (and many other places). In the beginning I was having trouble with the MDN digest for the hash parameter. Figured out by using pry that the call wasn't going through
 
 class CharactersController < ApplicationController
   def play
+    #shows the player a form to enter character names and a seed number
   end
 
-  #spent time here wondering if I should use the marvel_api gem with Faraday, but decided it had last been updated 3-5 years ago and I may run into issues, taking precious time away from making this app which was due in 3 days.
+  #Spent time here wondering if I should use the marvel_api gem with Faraday, but decided it had last been updated 3-5 years ago and I may run into issues, taking precious time away from making this app which was due in 3 days.
 
   def character_play
     if params[:character_one].empty? || params[:character_two].empty? || params[:num].empty?
@@ -53,11 +54,11 @@ class CharactersController < ApplicationController
       elsif @resp_one.success? && @resp_two.success?
         @character_one = character_one['data']['results']
         @character_two = character_two['data']['results']
-        #error cases for when the character isn't found
-        #I want to refactor this later so the winner shows on another page by redirect
-        #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
-        if @character_one.blank? || @character_two.blank? || @character_one[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0].nil?
-          #some characters have a blank description. The last major roadblock in this project was that some of the Marvel Universe characters didn't contain descriptions, therefore the game wouldn't be able to compare their words according to the seeded params.
+        #I want to refactor this later so the winner shows on another page by redirect, but for now all of that is happening here.
+        #I think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
+        #Error cases for when the character isn't found are handled below
+        if @character_one.blank? || @character_two.blank? || @character_one[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0]['name'].split(' ')[params[:num].to_i].nil? || @character_one[0]['comics']['items'][0]['name'].split(' ')[params[:num].to_i].nil?
+          #Some characters have a blank description. The last major roadblock in this project was that some of the Marvel Universe characters didn't contain descriptions, therefore the game wouldn't be able to compare their words according to the seeded params.
           #I decided to make it so if this happens, the first listed comic's title length is compared instead of the description.
           #For those edge cases who have nothing listed under them like 'S.H.E.I.L.D.', or have no comics listed, I just threw an error for the user. I could maybe instead take the params and decide the winner based on that, but it seems like the players would catch on!
           @error = "Try Again with different characters, that didn't seem to work."
@@ -69,22 +70,22 @@ class CharactersController < ApplicationController
           render 'play'
         else
           @word_one = @character_one[0]['description'].split(' ')[params[:num].to_i]
-          #to compare the word length at that index of the description as it's split into an array
+          #To compare the word length at that index of the description as it's split into an array
           @all_words_one = @character_one[0]['description'].split(' ')
-          #to compare the descriptions to see if the magic words are present (below)
+          #To compare the whole descriptions to see if the magic words are present (below)
           @word_two = @character_two[0]['description'].split(' ')[params[:num].to_i]
           @all_words_two = @word_two = @character_two[0]['description'].split(' ')
           @two_magic = @all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")
           @one_magic = @all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive")
           render 'play'
         end
-          #both characters are identified! The play view is rendered with the proper info/images
-          #I decided to compare the word_one and word_two variables in the view for the winner but I think I could easily put those conditional statements here
+          #Both characters are identified! The play view is rendered with the proper info/images
+          #I decided to compare the word_one and word_two variables in the view for the winner, but I think I could easily put those conditional statements here
       else
         @error = "That didn't work, try again"
         render 'play'
       end
-      #an error message in case there's a timeout
+      #An error message in case there's a timeout
       rescue Faraday::ConnectionFailed
         @error = "There was a timeout. Please try again."
       rescue Faraday::Response::RaiseError
@@ -95,7 +96,7 @@ class CharactersController < ApplicationController
   end
 
   def index
-    #this is just a rendering with a search form for someone to enter the first few letters of a character to find them
+    #This is just a rendering with a search form for someone to enter the first few letters of a character to find them
   end
 
   def searchByLetter
@@ -118,7 +119,7 @@ class CharactersController < ApplicationController
     else
       @error = "Sorry you need to enter at least one letter"
     end
-    #renders the page again with the search results. For some reason if there's a lot of results, it only will load the first 20. The API has set that as the limit. That's why this search form is so important so people can find the characters they want.
+    #Renders the page again with the search results. For some reason if there's a lot of results, it only will load the first 20. The API has set that as the limit. That's why this search form is so important so people can find the characters they want.
     render 'index'
   end
 
