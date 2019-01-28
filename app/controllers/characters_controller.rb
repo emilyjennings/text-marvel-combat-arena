@@ -64,6 +64,7 @@ class CharactersController < ApplicationController
             @error = "Try Again with different characters, that didn't seem to work."
             render 'play'
           else
+            #This edge case means that sometimes the Hulk or Spider-Man might not win! Exciting. Try "Gamora" against the Hulk and Gamora wins!
             @word_one = @character_one[0]['comics']['items'][0]['name'].split(' ')[params[:num].to_i]
             @word_two = @character_two[0]['comics']['items'][0]['name'].split(' ')[params[:num].to_i]
             render 'play'
