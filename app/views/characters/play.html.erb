@@ -22,21 +22,20 @@
   <div class="player">
     <div class="clearfix">
       <div class="character_play">
-        <div class="name"><%= link_to @character_one[0]["name"], @character_one[0]["urls"][0]["url"]%></div>
-        <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
+        <div class="name"><%= link_to name(@character_one), url(@character_one)%></div>
+        <div class="thumbnail"><%= image_tag img(@character_one)%></div>
       </div>
       <div class="text"><h1> VS </h1></div>
 
       <div class="character_play">
-        <div class="name"><%= link_to @character_two[0]["name"], @character_two[0]["urls"][0]["url"]%></div>
-        <!-- I need to refactor this later so the name is a helper method -->
-        <div class="thumbnail"><%=image_tag @character_two[0]['thumbnail']['path'] + '.jpg'%></div>
+        <div class="name"><%= link_to name(@character_two), url(@character_two)%></div>
+        <div class="thumbnail"><%=image_tag img(@character_two)%></div>
       </div>
     </div>
   </div>
   <div class="clearfix">
     <div class="winner">
-      <%if @one_magic && @two_magic%>
+      <%if (@one_magic && @two_magic) || (@character_one == @character_two)%>
         <h1>It's a draw!</h1>
       <%elsif @one_magic%>
         <h1>The winner is: <%=name(@character_one)%></h1>

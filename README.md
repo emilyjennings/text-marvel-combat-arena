@@ -27,6 +27,8 @@ It was hard to get the logic to work at first for the winner with the special ma
 
 The errors were the last difficulty here. I couldn't seem to display an error message on the view until I used the .empty? method on the params. I also couldn't find a case where the error was directly from the API to test that out.
 
+After the app was working, I felt the code was unattractive and hard to read, so I started refactoring it with helper methods first. You can find some of these new methods in the characters helper method file.
+
 ## Why I loved working on this so much
 I learned a ton about calling APIs through working on this. I already had worked with APIs from foursquare and github, but it was so fun working with Marvel because the documentation was so well written, and the content was right up my alley!
 

@@ -11,6 +11,15 @@ class CharactersController < ApplicationController
   def character_play
     if params[:character_one].empty? || params[:character_two].empty? || params[:num].empty?
       @error = "You need to enter all parameters for this game to work."
+
+      begin
+      rescue Faraday::ConnectionFailed
+        @error = "There was a timeout. Please try again."
+
+      rescue Faraday::Response::RaiseError
+        @error = "There was a problem finding that. Please try again."
+      end
+
       render 'play'
     else
       public_key = ENV['public_key']
@@ -62,10 +71,10 @@ class CharactersController < ApplicationController
         @all_words_one = @character_one[0]['description'].split(' ')
         @word_two = @character_two[0]['description'].split(' ')[params[:num].to_i]
         @all_words_two = @word_two = @character_two[0]['description'].split(' ')
+        @two_magic = @all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")
+        @one_magic = @all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive")
       end
       #I decided to compare the word_one and word_two variables in the view for the winner but I think I could easily put those conditional statements here
-      @two_magic = @all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")
-      @one_magic = @all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive")
 
       #an error mesage in case there's a timeout
       rescue Faraday::ConnectionFailed
