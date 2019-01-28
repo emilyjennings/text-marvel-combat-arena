@@ -1,4 +1,6 @@
 module CharactersHelper
+  #Helper methods to clean up the code a bit to make it more readable
+  
   def name(character)
     character[0]['name']
   end
