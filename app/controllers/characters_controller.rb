@@ -56,7 +56,7 @@ class CharactersController < ApplicationController
         #error cases for when the character isn't found
         #I want to refactor this later so the winner shows on another page by redirect
         #For now, the number chosen is used immediately to give the winner. i think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
-        if @character_one.blank? || @character_two.blank? || @character_one[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0].nil?
+        if @character_one.blank? || @character_two.blank? || @character_one[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0]['name'].split(' ')[params[:num].to_i].nil? || @character_one[0]['comics']['items'][0]['name'].split(' ')[params[:num].to_i].nil?
           #some characters have a blank description. The last major roadblock in this project was that some of the Marvel Universe characters didn't contain descriptions, therefore the game wouldn't be able to compare their words according to the seeded params.
           #I decided to make it so if this happens, the first listed comic's title length is compared instead of the description.
           #For those edge cases who have nothing listed under them like 'S.H.E.I.L.D.', or have no comics listed, I just threw an error for the user. I could maybe instead take the params and decide the winner based on that, but it seems like the players would catch on!

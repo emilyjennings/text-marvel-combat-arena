@@ -14,4 +14,5 @@ module CharactersHelper
   def img(character)
     character[0]['thumbnail']['path'] + '.jpg'
   end
+
 end

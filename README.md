@@ -23,9 +23,9 @@ I wanted to use Postman to look at the hashes I was calling in the Marvel API so
 
 I thought of a lot of great ways this could be refactored and improved upon to be a fun app. I want to make it so there are sessions that can help the players' choices persist through the controller with different views for the winner sot here's a bit of suspense before the winner is shown.
 
-It was hard to get the logic to work at first for the winner with the special magic word exceptions. I ran into some syntax issues but got through them and made sure that draws were accounted for.
+It was hard to get the logic to work at first for the winner with the special magic word exceptions. I ran into some syntax issues but got through them and made sure that it was accounted for when there was a 'draw'.
 
-The errors were the last difficulty here. I couldn't seem to display an error message on the view until I used the .empty? method on the params. I also couldn't find a case where the error was directly from the API to test that out.
+The errors for edge cases were the last difficulty here. There are characters without descriptions, so I made it so they could win instead based on length of the first comic's title in that case. If there wasn't a comic title, I created error messages for the user to re-try. Turns out there were a lot of different scenarios, like characters with returned empty data, etc. I enjoyed sifting through all the edge cases and I am not entirely sure I have yet caught them all.
 
 After the app was working, I felt the code was unattractive and hard to read, so I started refactoring it with helper methods first. You can find some of these new methods in the characters helper method file.
 
