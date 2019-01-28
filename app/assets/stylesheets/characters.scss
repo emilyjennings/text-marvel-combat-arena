@@ -4,8 +4,8 @@
 
 body {
   margin: 0 auto;
-  background-color: #87eda7;
-  color: #42356b;
+  background-color: #42356b;
+  color: #87eda7;
   font-size: 20px;
   text-align: center;
 }
@@ -33,7 +33,7 @@ body {
 }
 
 .character {
-  border: 3px solid #42356b;
+  border: 3px solid #87eda7;
   display: inline-block;
   float: left;
   width: 200px;
@@ -42,7 +42,7 @@ body {
 }
 
 .character_play {
-  border: 3px solid #42356b;
+  border: 3px solid #87eda7;
   width: 200px;
   height: 200px;
   text-align: center;
@@ -67,9 +67,9 @@ body {
 }
 
 a {
-  color: #110733;
+  color: #b6d3bf;
 }
 
 a:hover {
-  color: #b6d3bf;
+  color: #110733;
 }
