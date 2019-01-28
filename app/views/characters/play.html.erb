@@ -5,10 +5,13 @@
 <%= form_tag '/play' do %>
   <%= label_tag :character_one %>
   <%= text_field_tag :character_one %>
+  <br>
   <%= label_tag :character_two %>
   <%= text_field_tag :character_two %>
+  <br>
   <%= label_tag 'Pick a number' %>
   <%= number_field_tag :num, nil, min: "1", max: "9" %>
+  <br>
   <%= submit_tag "Submit" %>
 <% end %>
 
@@ -16,8 +19,8 @@
 
 
 <%if @word_one && @word_two %>
-  <div class="clearfix">
-    <div class="players">
+  <div class="player">
+    <div class="clearfix">
       <div class="character_play">
         <div class="name"><%= link_to @character_one[0]["name"], @character_one[0]["urls"][0]["url"]%></div>
         <div class="thumbnail"><%= image_tag @character_one[0]['thumbnail']['path'] + '.jpg' %></div>
@@ -33,23 +36,22 @@
   </div>
   <div class="clearfix">
     <div class="winner">
-
-      <%if (@all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")) && (@all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive"))%>
+      <%if @one_magic && @two_magic%>
         <h1>It's a draw!</h1>
-      <%elsif (@all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive"))%>
+      <%elsif @one_magic%>
         <h1>The winner is: <%=@character_one[0]["name"]%></h1>
         <p><%=@character_one[0]["description"]%></p>
-      <%elsif (@all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive"))%>
-        <h1>The winner is: <%=@character_two[0]["name"]%></h1>
-        <p><%=@character_two[0]["description"]%></p>
-      <%elsif @word_one.length > @word_two.length%>
-        <h1>The winner is: <%=@character_one[0]["name"]%></h1>
-        <p><%=@character_one[0]["description"]%></p>
-      <%elsif @word_one.length < @word_two.length%>
+      <%elsif @two_magic%>
         <h1>The winner is: <%=@character_two[0]["name"]%></h1>
         <p><%=@character_two[0]["description"]%></p>
       <%elsif @word_one.length == @word_two.length%>
         <h1>It's a draw!</h1>
+      <%elsif @word_one.length > @word_two.length%>
+        <h1>The winner is: <%=@character_one[0]["name"]%></h1>
+        <p><%=@character_one[0]["description"]%></p>
+      <%else @word_one.length < @word_two.length%>
+        <h1>The winner is: <%=@character_two[0]["name"]%></h1>
+        <p><%=@character_two[0]["description"]%></p>
       <%end%>
     </div>
   </div>

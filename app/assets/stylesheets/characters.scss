@@ -3,10 +3,23 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-  margin: 20px;
+  margin: 0 auto;
   background-color: #87eda7;
   color: #42356b;
   font-size: 20px;
+  text-align: center;
+}
+
+.players {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.clearfix {
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .thumbnail img {
@@ -33,16 +46,11 @@ body {
   width: 200px;
   height: 200px;
   text-align: center;
-  float: left;
+  display: inline-block;
 }
 
 .text {
-  display: block;
-  float: left;
-}
-
-.players {
-  margin: 30px;
+  display: inline-block;
 }
 
 .clearfix::after {
@@ -52,7 +60,7 @@ body {
 }
 
 .win {
-  display: block;
+  display: inline-block;
   float: none;
   clear: both;
   width: 100%;
