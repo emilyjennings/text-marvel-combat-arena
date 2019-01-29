@@ -70,7 +70,7 @@ class CharactersController < ApplicationController
           if comic_split(@character_two)[index].nil? || comic_split(@character_one)[index].nil?
             @error = "Try again with different characters."
           else
-            #This edge case means that sometimes the Hulk or Spider-Man might not win! Exciting. Try "Gamora" against the Hulk and Gamora wins!
+            #This edge case means that sometimes the Hulk or Spider-Man might not win! Exciting. Try "Gamora" against the Hulk with the seed number 1, and Gamora wins!
             @word_one = comic_split(@character_one)[index]
             @word_two = comic_split(@character_two)[index]
           end
