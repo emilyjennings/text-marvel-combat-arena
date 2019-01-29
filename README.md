@@ -43,10 +43,9 @@ I just loved how I assumed every really hard part I was stuck on, such as displa
 - [x] - The winner of the battle is the character whose WORD has the most characters EXCEPT if either character has a MAGIC WORD “Gamma” or “Radioactive” they automatically Win
 - [x] - Create a case where both players have the magic word
 - [x] - Handle any errors or edge cases and display the message in a user friendly manner, such as the names weren't entered or the name couldn't be found in the database
-- [ ] - refactor the code into models, organize by marvel (api calls) and characters
-- [x] - create helper methods to increase the readability of the code
-- [ ] - create a login and sessions so the player can go between views and controllers
-- [ ] - add cool front end features like displaying the image of each character
+- [x] - refactor the code into helper methods to make more readable
+- [ ] - create a login and sessions so the player can go between views and controllers (extra)
+- [ ] - add cool front end features like displaying the image of each character (extra)
 
 ## How to start and run this
 
