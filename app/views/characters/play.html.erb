@@ -22,14 +22,14 @@
   <div class="player">
     <div class="clearfix">
       <div class="character_play">
-        <div class="name"><%= link_to name(@character_one), url(@character_one)%></div>
-        <div class="thumbnail"><%= image_tag img(@character_one)%></div>
+        <div class="player_name"><%= link_to name(@character_one), url(@character_one)%></div>
+        <div class="player_thumbnail"><%= image_tag img(@character_one)%></div>
       </div>
       <div class="text"><h1> VS </h1></div>
 
       <div class="character_play">
-        <div class="name"><%= link_to name(@character_two), url(@character_two)%></div>
-        <div class="thumbnail"><%=image_tag img(@character_two)%></div>
+        <div class="player_name"><%= link_to name(@character_two), url(@character_two)%></div>
+        <div class="player_thumbnail"><%=image_tag img(@character_two)%></div>
       </div>
     </div>
   </div>
@@ -58,6 +58,6 @@
 
 <%elsif @error%>
 
-  <h2>Sorry, <%=@error%></h2>
+  <h2><%=@error%></h2>
 
 <%end%>

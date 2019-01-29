@@ -27,8 +27,18 @@ body {
   height: 150px;
 }
 
+.player_thumbnail img {
+  width: 200px;
+  height: 200px;
+}
+
 .name {
-  font-size: 15px;
+  font-size: 20px;
+  color: teal;
+}
+
+.player_name {
+  font-size: 25px;
   color: teal;
 }
 
@@ -43,8 +53,8 @@ body {
 
 .character_play {
   border: 3px solid #87eda7;
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   text-align: center;
   display: inline-block;
 }
@@ -72,4 +82,14 @@ a {
 
 a:hover {
   color: #110733;
+}
+
+.goback {
+  font-size: 25px;
+  margin: 20px;
+  position: fixed;
+  background: #42356b;
+  padding: 10px;
+  top: 0;
+  right: 0;
 }

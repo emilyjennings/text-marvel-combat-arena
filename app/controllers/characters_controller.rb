@@ -60,27 +60,27 @@ class CharactersController < ApplicationController
         #I want to refactor this later so the winner shows on another page by redirect, but for now all of that is happening here.
         #I think it would be better to have that somehow delayed so you see who's battling first then click another button to get the winner.
         #Error cases for when the character isn't found are handled below
-        if @character_one.blank? || @character_two.blank? || @character_one[0]['comics']['items'][0].nil? || @character_two[0]['comics']['items'][0].nil?
+        if @character_one.blank? || @character_two.blank? || first_comic_blank?(@character_one) || first_comic_blank?(@character_two)
           #Some characters have a blank description. The last major roadblock in this project was that some of the Marvel Universe characters didn't contain descriptions, therefore the game wouldn't be able to compare their words according to the seeded params.
           #I decided to make it so if this happens, the first listed comic's title length is compared instead of the description.
           #For those edge cases who have nothing listed under them like 'S.H.E.I.L.D.', or have no comics listed, I just threw an error for the user. I could maybe instead take the params and decide the winner based on that, but it seems like the players would catch on!
           @error = "Try again with different characters, that didn't seem to work."
           render 'play'
-        elsif @character_one[0]['description'].blank? || @character_two[0]['description'].blank?
-          if @character_two[0]['comics']['items'][0]['name'].split(' ')[index].nil? || @character_one[0]['comics']['items'][0]['name'].split(' ')[index].nil?
+        elsif desc_blank?(@character_one) || desc_blank?(@character_two)
+          if comic_split(@character_two)[index].nil? || comic_split(@character_one)[index].nil?
             @error = "Try again with different characters."
           else
             #This edge case means that sometimes the Hulk or Spider-Man might not win! Exciting. Try "Gamora" against the Hulk and Gamora wins!
-            @word_one = @character_one[0]['comics']['items'][0]['name'].split(' ')[index]
-            @word_two = @character_two[0]['comics']['items'][0]['name'].split(' ')[index]
+            @word_one = comic_split(@character_one)[index]
+            @word_two = comic_split(@character_two)[index]
           end
           render 'play'
         elsif @character_one && @character_two
-          @word_one = @character_one[0]['description'].split(' ')[index]
+          @word_one = desc_split(@character_one)[index]
           #To compare the word length at that index of the description as it's split into an array
           @all_words_one = @character_one[0]['description'].split(' ')
           #To compare the whole descriptions to see if the magic words are present (below)
-          @word_two = @character_two[0]['description'].split(' ')[index]
+          @word_two = desc_split(@character_two)[index]
           @all_words_two = @word_two = @character_two[0]['description'].split(' ')
           @two_magic = @all_words_two.include?("Gamma") || @all_words_two.include?("Radioactive") || @all_words_two.include?("gamma") || @all_words_two.include?("radioactive")
           @one_magic = @all_words_one.include?("Gamma") || @all_words_one.include?("Radioactive") || @all_words_one.include?("gamma") || @all_words_one.include?("radioactive")
