@@ -67,6 +67,7 @@ class CharactersController < ApplicationController
           @error = "Try again with different characters, that didn't seem to work."
           render 'play'
         elsif desc_blank?(@character_one) || desc_blank?(@character_two)
+          #checking if the character has a description at all, if not, we check the first comic book's title
           if comic_split(@character_two)[index].nil? || comic_split(@character_one)[index].nil?
             @error = "Try again with different characters."
           else
