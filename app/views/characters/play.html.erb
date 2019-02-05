@@ -1,19 +1,18 @@
 <h1>Marvel Character Combat Arena</h1>
-<h2>Who will battle today?</h2>
 
-<h3>Enter both characters:</h3>
-<%= form_tag '/play' do %>
-  <%= label_tag :character_one %>
-  <%= text_field_tag :character_one %>
-  <br>
-  <%= label_tag :character_two %>
-  <%= text_field_tag :character_two %>
-  <br>
-  <%= label_tag 'Pick a number' %>
-  <%= number_field_tag :num, nil, min: "1", max: "9" %>
-  <br>
-  <%= submit_tag "Submit" %>
-<% end %>
+<div id="play"><h2>Ready to Play? Click here!</h2></div>
+<div id="start"></div>
+
+</div>
+
+<script>
+  $('#play').click(function(){
+    if ($('#start').val() == "") {
+      $('#start').html("<%= escape_javascript(render "play_form")%>")
+    }
+  });
+</script>
+
 
 <p>Don't know which character you want? <%=link_to "Search Characters", characters_path%></p>
 
