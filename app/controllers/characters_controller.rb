@@ -110,8 +110,8 @@ class CharactersController < ApplicationController
   end
 
   def searchByLetter
-    public_key = ENV['public_key']
-    private_key = ENV['private_key']
+    public_key = ENV['marvel_public_key']
+    private_key = ENV['marvewl_private_key']
     timestamp = DateTime.now.to_s
     hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
 
