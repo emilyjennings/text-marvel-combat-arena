@@ -13,8 +13,8 @@ class CharactersController < ApplicationController
       @error = "You need to enter all parameters for this game to work."
       render 'play'
     else
-      public_key = ENV['public_key']
-      private_key = ENV['private_key']
+      marvel_public_key = ENV['public_key']
+      marvel_private_key = ENV['private_key']
       timestamp = DateTime.now.to_s
       hash = Digest::MD5.hexdigest( "#{timestamp}#{private_key}#{public_key}" )
       #I spent a fair amount of time looking at the Marvel API documentation to figure out how they wanted the hash digested, and even get help at the meetup I went to during this project on the MD5 digest
